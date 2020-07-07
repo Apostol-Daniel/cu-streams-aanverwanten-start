@@ -30,6 +30,11 @@ namespace TextFiles.Lib
                 throw new Exception("De map is niet gevonden");
             }
 
+            if (!File.Exists(bestandsPad)) 
+            {
+                throw new Exception("Het bestand is niet gevonden");
+            }
+
             try
             {
                 // Er wordt een instance aangemaakt van de StreamReader-class
