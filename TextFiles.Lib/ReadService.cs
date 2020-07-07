@@ -11,15 +11,20 @@ namespace TextFiles.Lib
         public static string RootPad { get; } = AppDomain.CurrentDomain.BaseDirectory;
         public static string MyDocs { get; } = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        public string TextFileToString(string bestandsMap, string bestandsNaam)
+        public string TextFileToString(string bestandsMap, string bestandsNaam,Encoding encoding = null)
         {
             string bestandsInhoud = "";
             string bestandsPad = bestandsMap + "\\" + bestandsNaam;
 
+            if (encoding == null) 
+            {
+                encoding = Encoding.UTF8;
+            }
+
             try
             {
                 // Er wordt een instance aangemaakt van de StreamReader-class
-                using (StreamReader sr = new StreamReader(bestandsPad))
+                using (StreamReader sr = new StreamReader(bestandsPad,encoding))
                 {
                     bestandsInhoud = sr.ReadToEnd();
                 }
