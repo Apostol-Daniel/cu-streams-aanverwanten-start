@@ -21,6 +21,15 @@ namespace TextFiles.Lib
                 encoding = Encoding.UTF8;
             }
 
+            if (string.IsNullOrEmpty(bestandsPad.Trim())) 
+            {
+                throw new Exception("Er is geen bestand gekozen");
+            }
+            if (!Directory.Exists(bestandsMap)) 
+            {
+                throw new Exception("De map is niet gevonden");
+            }
+
             try
             {
                 // Er wordt een instance aangemaakt van de StreamReader-class
