@@ -15,6 +15,34 @@ namespace TextFiles.Lib
         /// <param name="bestandsMap">Plaats van het weg te schrijven bestand</param>
         /// <param name="bestandsNaam">Naam van het weg te schrijven bestand</param>
         /// <returns>boolean die aanduidt of het gelukt is om het bestand op te slaan</returns>
+        /// 
+
+        public string[] KiesBestand(string filter = "Text documents(.txt)|*.txt|" +
+                                                    "Comma separated values(.csv)|*.csv")
+        {
+            string[] gekozenBesnatndsInfo = new string[2];
+            string gekozenBestandsPad;
+            int lastBackslashIndex;
+            OpenFileDialog kiesBestand = new OpenFileDialog();
+            kiesBestand.Filter = filter;
+            bool? result = kiesBestand.ShowDialog();
+            //bool? beteknt dat de boolean naast true en false ook de waarde null kan bevatten
+
+            gekozenBestandsPad = kiesBestand.FileName;
+
+            if (string.IsNullOrEmpty(gekozenBestandsPad.Trim()))
+            {
+                throw new Exception("Er is geen bestand gekozen");
+            }
+            else
+            {
+                lastBackslashIndex = gekozenBestandsPad.LastIndexOf('\\');
+                gekozenBesnatndsInfo[0] = gekozenBestandsPad.Substring(0, lastBackslashIndex);
+                gekozenBesnatndsInfo[1] = gekozenBestandsPad.Substring(lastBackslashIndex + 1);
+            }
+            return gekozenBesnatndsInfo;
+        }
+
         public bool StringToTextFile(string tekst, string bestandsMap, string bestandsNaam,
             Encoding encoding = null,bool overshrijfBestaandBestand = false)
         {

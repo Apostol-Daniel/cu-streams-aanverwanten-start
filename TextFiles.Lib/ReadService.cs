@@ -11,6 +11,8 @@ namespace TextFiles.Lib
         public static string RootPad { get; } = AppDomain.CurrentDomain.BaseDirectory;
         public static string MyDocs { get; } = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
+        
+
         public string TextFileToString(string bestandsMap, string bestandsNaam,Encoding encoding = null)
         {
             string bestandsInhoud = "";
