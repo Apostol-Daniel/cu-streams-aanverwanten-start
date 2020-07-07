@@ -17,7 +17,32 @@ namespace TextFiles.Lib
         /// <returns>boolean die aanduidt of het gelukt is om het bestand op te slaan</returns>
         /// 
 
-        
+        public string [] GeefPadOmOpTeSlaan(string voorgesteldeNaam = "", 
+            string filter = "Text documents (.txt)|*.txt|Comma separated values (.csv)|*.csv")
+        {
+            string[] bestandInfo;
+            string pad, bestandsNaam, folder;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = filter;
+            saveFileDialog.Title = "Kies een plaats om je bestand op te slaan";
+
+            if (!string.IsNullOrEmpty(voorgesteldeNaam.Trim())) 
+            {
+                saveFileDialog.FileName = voorgesteldeNaam;
+            }
+
+            saveFileDialog.ShowDialog();
+
+            pad = saveFileDialog.FileName;
+            bestandsNaam = saveFileDialog.SafeFileName;
+            folder = pad.Substring(0 , pad.Length - bestandsNaam.Length);
+            bestandInfo = new string[]
+            {
+                folder , bestandsNaam
+            };
+
+            return bestandInfo;
+        }
 
         public bool StringToTextFile(string tekst, string bestandsMap, string bestandsNaam,
             Encoding encoding = null,bool overshrijfBestaandBestand = false)
