@@ -26,6 +26,23 @@ namespace TextFiles.Lib
                 encoding = Encoding.Default;
             }
 
+            if(string.IsNullOrEmpty(bestandsPad.Trim())) 
+            {
+                throw new Exception("Er is geen bestand gekozen");
+            }
+
+            if (!Directory.Exists(bestandsMap)) 
+            {
+                try 
+                {
+                    Directory.CreateDirectory(bestandsMap);
+                }
+                catch (Exception)
+                {
+                    throw new Exception("De map is niet gevonden");
+                }
+            }
+
             try
             {
                 // Er wordt een instance aangemaakt van de StreamWriter-class
