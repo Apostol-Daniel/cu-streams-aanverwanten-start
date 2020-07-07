@@ -11,7 +11,31 @@ namespace TextFiles.Lib
         public static string RootPad { get; } = AppDomain.CurrentDomain.BaseDirectory;
         public static string MyDocs { get; } = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        
+        public string[] KiesBestand(string filter = "Text documents(.txt)|*.txt|" +
+                                                    "Comma separated values(.csv)|*.csv")
+        {
+            string[] gekozenBesnatndsInfo = new string[2];
+            string gekozenBestandsPad;
+            int lastBackslashIndex;
+            OpenFileDialog kiesBestand = new OpenFileDialog();
+            kiesBestand.Filter = filter;
+            bool? result = kiesBestand.ShowDialog();
+            //bool? beteknt dat de boolean naast true en false ook de waarde null kan bevatten
+
+            gekozenBestandsPad = kiesBestand.FileName;
+
+            if (string.IsNullOrEmpty(gekozenBestandsPad.Trim()))
+            {
+                throw new Exception("Er is geen bestand gekozen");
+            }
+            else
+            {
+                lastBackslashIndex = gekozenBestandsPad.LastIndexOf('\\');
+                gekozenBesnatndsInfo[0] = gekozenBestandsPad.Substring(0, lastBackslashIndex);
+                gekozenBesnatndsInfo[1] = gekozenBestandsPad.Substring(lastBackslashIndex + 1);
+            }
+            return gekozenBesnatndsInfo;
+        }
 
         public string TextFileToString(string bestandsMap, string bestandsNaam,Encoding encoding = null)
         {

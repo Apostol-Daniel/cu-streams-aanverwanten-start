@@ -88,7 +88,26 @@ namespace TextFiles.Wpf
 
         private void BtnKiesBestand_Click(object sender, RoutedEventArgs e)
         {
+            try 
+            {
+                string[] gekozenBestand = readService.KiesBestand();
+                txtTekst.Text = "";
+                
+                if(gekozenBestand !=null) 
+                {
+                    string bestandsInhoud = readService.TextFileToString(gekozenBestand[0],
+                        gekozenBestand[1], huidigeKarakterset);
 
+                    txtTekst.Text = bestandsInhoud;
+                    txtBestandsnaam.Text = gekozenBestand[1];
+                    huidigBestand = new string[] { gekozenBestand[0], gekozenBestand[1] };
+                    ToonMelding($"Bestand {gekozenBestand[1]} werd succesvol gelezen", true);
+                }
+            }
+            catch (Exception ex) 
+            {
+                ToonMelding(ex.Message);
+            }
         }
 
         private void BtnSchrijfBestand_Click(object sender, RoutedEventArgs e)
