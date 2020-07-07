@@ -107,7 +107,7 @@ namespace TextFiles.Wpf
             {
                 string tekst = txtTekst.Text;
 
-                writeService.StringToTextFile(tekst, huidigBestand[INDEX_FOLDER], huidigBestand[INDEX_FILENAME],huidigeKarakterset);
+                writeService.StringToTextFile(tekst, huidigBestand[INDEX_FOLDER], huidigBestand[INDEX_FILENAME],huidigeKarakterset,true);
                 ToonMelding($"Bestand werd succesvol overschreven in de map: {huidigBestand[INDEX_FOLDER]}", true);
             }
             catch (Exception ex)
