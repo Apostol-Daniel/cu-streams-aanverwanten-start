@@ -112,7 +112,24 @@ namespace TextFiles.Wpf
 
         private void BtnSchrijfBestand_Click(object sender, RoutedEventArgs e)
         {
+            try 
+            {
+                string teksts = txtTekst.Text;
+                string[] bestandsInfo = writeService.GeefPadOmOpTeSlaan(txtBestandsnaam.Text);
 
+                if (bestandsInfo[INDEX_FILENAME] == "") 
+                {
+                    throw new Exception("Het bestand werd niet opgeslagen");
+                }
+
+                writeService.StringToTextFile
+                    (teksts, bestandsInfo[INDEX_FOLDER], bestandsInfo[INDEX_FILENAME], huidigeKarakterset);
+                ToonMelding($"Bestand werd succesvol weggeschreven in de map : {bestandsInfo[INDEX_FOLDER]}");
+            }
+            catch ( Exception ex)
+            {
+                ToonMelding(ex.Message);
+            }
         }
 
         private void cmbEncoding_SelectionChanged(object sender, SelectionChangedEventArgs e)
