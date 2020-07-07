@@ -77,7 +77,7 @@ namespace TextFiles.Wpf
                 string bestandsNaam = txtBestandsnaam.Text;
                 txtTekst.Text = "";
 
-                txtTekst.Text = readService.TextFileToString(bestandenMap, bestandsNaam);
+                txtTekst.Text = readService.TextFileToString(bestandenMap, bestandsNaam, huidigeKarakterset);
                 ToonMelding($"Bestand {bestandsNaam} werd succesvol gelezen", true);
             }
             catch (Exception ex)
