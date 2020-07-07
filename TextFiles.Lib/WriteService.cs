@@ -15,7 +15,8 @@ namespace TextFiles.Lib
         /// <param name="bestandsMap">Plaats van het weg te schrijven bestand</param>
         /// <param name="bestandsNaam">Naam van het weg te schrijven bestand</param>
         /// <returns>boolean die aanduidt of het gelukt is om het bestand op te slaan</returns>
-        public bool StringToTextFile(string tekst, string bestandsMap, string bestandsNaam, Encoding encoding = null)
+        public bool StringToTextFile(string tekst, string bestandsMap, string bestandsNaam,
+            Encoding encoding = null,bool overshrijfBestaandBestand = false)
         {
             bool isSuccesvolWeggeschreven;
             string bestandsPad;
@@ -41,6 +42,11 @@ namespace TextFiles.Lib
                 {
                     throw new Exception("De map is niet gevonden");
                 }
+            }
+
+            if (File.Exists(bestandsPad) && !overshrijfBestaandBestand) 
+            {
+                throw new Exception("Het bestand bestaat reeds");
             }
 
             try
